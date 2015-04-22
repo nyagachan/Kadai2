@@ -30,6 +30,7 @@
 /* Anagram Game Application */
 
 package com.toy.anagrams.lib;
+import java.util.Random;
 
 /**
  * Implementation of the logic for the Anagram Game application.
@@ -86,53 +87,27 @@ final class StaticWordLibrary extends WordLibrary {
         "traditional",
         "visually"};
 
-    private static final String[] SCRAMBLED_WORD_LIST = {
-        "batsartcoin",
-        "maibuguos",
-        "ratimhteci",
-        "abkclssha",
-        "ibmtpa",
-        "iccrmutsnaec",
-        "ocbmnitaoni",
-        "ocsnqeeutnyl",
-        "ocsnroitmu",
-        "edrcmeneitgn",
-        "edepdnneyc",
-        "idasbmgiauet",
-        "ydanicm",
-        "neacsplutaoni",
-        "qeiuaveltn",
-        "xerpseisno",
-        "aficilatet",
-        "rfgaemtn",
-        "ehaxedicalm",
-        "milpmeneatitno",
-        "niidtsniugsiahleb",
-        "niehiratcen",
-        "nietnret",
-        "ajav",
-        "olacilazitno",
-        "imrcpoorecssro",
-        "anivagitno",
-        "poitimazitno",
-        "aparemert",
-        "aprtcki",
-        "ipkcel",
-        "opylomprich",
-        "irogorsuyl",
-        "isumtlnaoesuyl",
-        "psceficitaoni",
-        "tsurtcreu",
-        "elixalc",
-        "ilekiwse",
-        "amanegemtn",
-        "aminupalet",
-        "amhtmetacsi",
-        "ohjtvaa",
-        "evtrxe",
-        "nuisngde",
-        "rtdatioialn"
-    };
+    public static String suffle(String s) {
+    	int num = s.length();
+    	char[] c = new char[s.length()];
+    	Random r = new Random();
+    	int n,m;
+    	for(int i = 0;i < num;i++) {
+    	    c[i] = s.charAt(i);
+    	}
+    	n = r.nextInt(num);
+    	m = r.nextInt(num);
+    	while(n == m){m = r.nextInt(num);}
+    	
+    	char rnd = c[n];
+    	c[n] = c[m];
+    	c[m] = rnd;
+    	String word = "";
+    	for(int i = 0;i < num;i++) {
+    	    word  += String.valueOf(c[i]);
+    	}
+    	return word;
+    }
     
     final static WordLibrary DEFAULT = new StaticWordLibrary();
 
@@ -157,7 +132,7 @@ final class StaticWordLibrary extends WordLibrary {
      * @return word at that index in its scrambled form
      */
     public String getScrambledWord(int idx) {
-        return SCRAMBLED_WORD_LIST[idx];
+        return suffle(WORD_LIST[idx]);
     }
 
     /**
